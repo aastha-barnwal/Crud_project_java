@@ -47,21 +47,31 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    //user repository which extends mongorepository
     @Autowired
     private UserRepo userRepository;
 
+    //find user by username
     public User findByUserName(String username){
         return userRepository.findByUserName(username);
     }
+
+    // create user to db
     public User saveUser(User user){
         return userRepository.save(user);
     }
+
+    //get all users
     public List<User> getAll(){
         return userRepository.findAll();
     }
+
+    //get user by id
     public Optional<User> getById(String id){
         return userRepository.findById(id);
     }
+
+    // delete user by id
     public void delete(String id){
         userRepository.deleteById(id);
     }

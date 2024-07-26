@@ -73,20 +73,23 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // get all users
     @GetMapping
     public ResponseEntity<?> getAll(){
         return new ResponseEntity<>(userService.getAll(),HttpStatus.OK);
     }
+
+    //get user by id
     @GetMapping("Id/{id}")
     public ResponseEntity<?> getById(@PathVariable String id){
 //        System.out.println(userService.getById(id));
         if(userService.getById(id).isEmpty()){
-
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(userService.getById(id),HttpStatus.FOUND);
-
     }
+
+    // Save user or create user
     @PostMapping
     public ResponseEntity<?> create(@RequestBody User user){
         if(user.getUserName()==null || user.getPassword()==null){
@@ -95,6 +98,8 @@ public class UserController {
         userService.saveUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+    //Update username and password of the user
     @PutMapping("/{username}")
     public ResponseEntity<?> Update(@RequestBody User user,@PathVariable String username){
         User old = userService.findByUserName(username);
@@ -108,6 +113,8 @@ public class UserController {
             return new ResponseEntity<>(old,HttpStatus.ACCEPTED);
         }
     }
+
+    // Delete user by id
     @DeleteMapping("Id/{id}")
     public ResponseEntity<?> delete(@PathVariable String id){
         userService.delete(id);

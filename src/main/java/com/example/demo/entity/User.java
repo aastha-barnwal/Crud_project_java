@@ -52,6 +52,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "users")
 public class User {
 
+    // member variable
     @Id
     private String id;
     @Indexed(unique = true)

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepo extends MongoRepository<User, String> {
 
+    // function to find users by username
     User findByUserName(String username);
 
 }
